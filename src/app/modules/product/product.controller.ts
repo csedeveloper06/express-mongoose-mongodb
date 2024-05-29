@@ -1,6 +1,6 @@
 
 import { Request, Response } from 'express';
-import { ProductServices } from './product.service';
+import { ProductServices } from './Product.service';
 
 const createProduct = async (req: Request, res: Response) => {
     try{
@@ -18,13 +18,12 @@ const createProduct = async (req: Request, res: Response) => {
     }
 };
 
-const getAllProducts = async(req : Request,res:Response) => {
+const getAllProducts = async( req : Request, res : Response ) => {
     try{
         const result = await ProductServices.getAllProductsFromDB();
         res.status(200).json({
-      
             success : true,
-            message : "Get all the products successfully",
+            message : "Products fetched successfully",
             data : result,
           })
     }catch(err){

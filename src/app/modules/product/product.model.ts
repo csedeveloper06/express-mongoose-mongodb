@@ -1,19 +1,19 @@
 import { Schema, model } from 'mongoose';
-import { Inventory, Product, Variants } from './product.interface';
+import { TInventory, TProduct, TVariants } from './Product.interface';
 
-const variantSchema = new Schema<Variants>({
-  type: {
+const productVariantSchema = new Schema<TVariants>({
+  ProductType: {
     type: String,
     required: true,
   },
-  value: {
-    type: String,
+  ProductValue: {
+    type:String,
     required: true,
   },
 });
 
 
-const inventorySchema = new Schema<Inventory> ({
+const productInventorySchema = new Schema<TInventory> ({
     quantity: {
         type: Number,
         required: true,
@@ -24,7 +24,7 @@ const inventorySchema = new Schema<Inventory> ({
       }
 });
 
-const productSchema = new Schema<Product>({
+const productSchema = new Schema<TProduct>({
   name: {
     type: String,
     required: true,
@@ -41,17 +41,28 @@ const productSchema = new Schema<Product>({
     type: String,
     required: true,
   },
-  tags: [
-    {
-      type: String,
-      required: true,
-    },
-  ],
+  // tags: {
+  //   type: String,
+  //   enum : [ "electronics", "computer" , "wireless" , "mouse" , "keyboard" , "speaker" , "gaming" , 
+  //   "smartPhone" , "mobile" , "128GB" , "portable" , "audio", "yoga",  "fitness" , "shoes" , "kitchen"
+  //   , "kettle" , "lightweight" , "appliance" , "coffee" , "gym" , "food" , "home" ],
+  //   required : true,
+  // },
+  tags: {
+    type: [String],
+    enum: [
+      "electronics", "computer", "wireless", "mouse", "keyboard", "speaker", 
+      "gaming", "smartPhone", "mobile", "128GB", "portable", "audio", "yoga", 
+      "fitness", "shoes", "kitchen", "kettle", "lightweight", "appliance", 
+      "coffee", "gym", "food", "home", "running"
+    ],
+    required: true,
+  },
   variants:[
-    variantSchema
+    productVariantSchema
   ],
-  inventory: inventorySchema 
+  inventory: productInventorySchema 
 });
 
-export const ProductModel = model<Product>( "Product", productSchema );
+export const Product = model<TProduct>( "Product", productSchema );
 

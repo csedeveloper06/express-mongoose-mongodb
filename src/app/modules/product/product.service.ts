@@ -1,20 +1,20 @@
+import { TProduct } from "./Product.interface";
+import { Product } from "./Product.model";
 
-import { Product } from './product.interface';
-import { ProductModel } from './product.model';
 
-const createProductIntoDB = async (product: Product) => {
-  const result = await ProductModel.create(product);
+const createProductIntoDB = async (product: TProduct) => {
+  const result = await Product.create(product);
   return result;
 };
 
 const getAllProductsFromDB = async ()=>{
-    const result = ProductModel.find();
+    const result = Product.find();
     return result;
 }
 
 const getSingleProductFromDB = async (id:string)=>{
 
-    const result = ProductModel.findOne({_id: id });
+    const result = Product.findOne({_id: id });
     return result;
 }
 
